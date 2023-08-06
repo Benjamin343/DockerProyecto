@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar class="cabecera">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/tabs/tab1" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title  class="vecired" color="light">VeciRed</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <!-- INICIO TITULO -->
+  <ion-grid>
+    <div class="ripple-parent">
+      <ion-row>
+        <ion-col class="avisosTitlte ion-text-center">
+          <b>CREAR PUBLICACIÓN</b>
+        </ion-col>
+      </ion-row>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </ion-grid>
+  <!-- FIN TITULO -->
+  <ion-grid>
+    <ion-list>
+      <!-- INICIO IMAGENES -->
+      <ion-item>
+        <ion-label><b>Imágenes:</b></ion-label>
+        <input type="file" accept="image/*" multiple (change)="onFileSelected($event)">
+      </ion-item>
+      <!-- FIN IMAGENES -->
+      <!--INICIO TITULO-->
+      <ion-item>
+        <ion-label position="floating"><b>Título:</b></ion-label>
+        <ion-input type="text" minlength="4" placeholder="Nombre de publicacion" maxlength="30" [(ngModel)]="publicacion.titulo" required></ion-input>
+      </ion-item>
+      <span class="caracteres">{{ 30 - publicacion.titulo.length }} caracteres restantes </span>
+      <!-- FIN TITULO -->
+      <!-- INICIO DESCRIPCION -->
+      <ion-item>
+        <ion-label position="floating"><b>Descripción:</b></ion-label>
+        <ion-input type="text" minlength="3" placeholder="Descripción de la publicación" maxlength="30" [(ngModel)]="publicacion.descripcion" required></ion-input>
+      </ion-item>
+      <!-- FIN DESCRIPCION -->
+      <!-- INICIO PRECIO -->
+      <ion-item>
+        <ion-label><b>Precio:</b></ion-label>
+        <ion-input type="number" placeholder="Precio de la publicación" [(ngModel)]="publicacion.precio" required></ion-input>
+      </ion-item>
+      <!-- FIN PRECIO -->
+      <!-- INICIO CATEGORIA -->
+      <ion-item>
+        <ion-label><b>Categoría:</b></ion-label>
+        <ion-select [(ngModel)]="publicacion.categoria" placeholder="Seleccione una categoría" required>
+          <ion-select-option value="Hogar">Hogar</ion-select-option>
+          <ion-select-option value="Entretenimiento">Entretenimiento</ion-select-option>
+          <ion-select-option value="Electronica">Electronica</ion-select-option>
+          <ion-select-option value="Ropa">Ropa</ion-select-option>
+          <ion-select-option value="Gastronomia">Gastronomía</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button class="crearPubl"
+                  color="tertiary"
+                  shape="round"
+                  expand="full"
+                  (click)="crearPubl()"
+                  style="margin-top: 30%;">
+        Publicar
+      </ion-button>
+
+    </ion-list>
+  </ion-grid>
+
+</ion-content>

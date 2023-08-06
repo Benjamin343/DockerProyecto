@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar class="cabecera">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first" color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title  class="vecired" color="light">
+      VeciRed
+    </ion-title>
+
+    <ion-buttons slot="end">   
+      <ion-button disabled>
+        <ion-icon></ion-icon>
+      </ion-button>
+      
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+<!--INICIO EMTPY SOLICITUD-->
+<ion-grid  *ngIf="emptySolicitud" >
+  <ion-card class=" ion-text-center noEmit">
+  <img class="noEmitImage"src="/../../assets/noComunity.png"> 
+  <h3 class="noEmitTitle"><b>Aún no has pedido certificados.</b></h3>
+  </ion-card>
+</ion-grid>
+  <!--FIN EMTPY SOLICITUD-->
+
+
+  <!-- INICIO PULL2REFRESH-->
+  <ion-refresher slot="fixed" (ionRefresh)="pull2refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!-- FIN PULL2REFRESH-->
+  
+  <ion-row>
+    <ion-col size="12" size-lg="3" size-md="4" size-sm="6" size-xs="12"
+             *ngFor="let emisor of emisores"
+    >
+    <ion-card class="avisoUnitario"
+    class="avisoUnitario"
+    [ngClass]="{
+      'greyEvent': emisor.estado === 0,
+      'blueEvent': emisor.estado === 1,
+      'redEvent': emisor.estado=== 2
+    }">
+    
+    <ion-card-header>
+      <ion-grid>
+      <ion-row class="ion-justify-content-end">
+      <ion-title class="status"> Estado:</ion-title>
+      <ion-label
+      *ngIf="emisor.estado === 0"
+      color="dark"
+      style="text-transform: uppercase; font-size: 14px; margin-top: 10px;"
+    >
+      <b>SIN RESPONDER</b>
+    </ion-label>
+    <ion-label
+      *ngIf="emisor.estado === 1"
+      color="tertiary"
+      style="text-transform: uppercase; font-size: 14px;margin-top: 10px;"
+    >
+      <b>APROBADA</b>
+    </ion-label>
+    <ion-label
+      *ngIf="emisor.estado === 2"
+      color="danger"
+      style="text-transform: uppercase; font-size: 14px;margin-top: 10px;"
+    >
+      <b>RECHAZADA</b>
+    </ion-label>
+  </ion-row>
+    </ion-grid>
+      <ion-card-subtitle class="fontColor ion-text-left">
+        <ion-icon name="people"></ion-icon>
+        {{ emisor.comunidad.nombreComunidad }}
+      </ion-card-subtitle>
+      <ion-card-subtitle class="tituloCert">
+        <ion-icon name="ribbon"></ion-icon>
+        <b>{{ emisor.certificado.titulo }}</b>
+      </ion-card-subtitle>
+      <ion-card-subtitle class="fontColor ion-text-left">
+        <ion-icon name="calendar-number-outline"></ion-icon>
+        Fecha de peticion: {{emisor.fechaemision | date: 'dd-MM-yyyy'}}
+      </ion-card-subtitle>
+      <ion-col offset="9">
+        <ion-button
+          class="generador"
+          id="aceptarVe"
+          color="tertiary"
+          size="size-s"
+          style="width: 25%;"
+          [disabled]="emisor.estado !== 1"
+          (click)="evento()"
+        >
+        <ion-icon slot="icon-only" name="download-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-card-header>
+    
+    </ion-card>
+
+    </ion-col>
+  </ion-row>
+  <!-- INICIO INFINITE SCROLL -->
+  <ion-infinite-scroll (ionInfinite)="infinito($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Cargando mas solicitudes..."
+      *ngIf="!emptySolicitud && !finInfinito"
+    ></ion-infinite-scroll-content>
+    <div class="nomasSolicitudes" *ngIf="finInfinito">No hay más solicitudes que mostrar.</div>
+  </ion-infinite-scroll>
+  <!-- FIN INFINITE SCROLL -->
+</ion-content>
+

@@ -1,0 +1,76 @@
+.cabecera{
+    --background: linear-gradient(135deg, #110A3B, #2f32a0);
+}
+
+.generador{
+    vertical-align: baseline;
+}
+
+
+.redEvent{
+    //background-color: #ffb2ae;
+    background-color: rgba(240, 20, 20, 0.300);
+    
+}
+
+.greenEvent{
+    //background-color: #3cb371;
+    background-color: rgba(91, 240, 4, 0.250);
+}
+
+.greyEvent{
+    //background-color: #fada5e;
+    background-color: rgba(146, 146, 144, 0.25);
+}
+
+.blueEvent{
+    background-color: rgba(47, 51, 160, 0.185);
+}
+.status{
+    text-align: left;
+    font-size: x-large;
+    font-weight: bold;
+    padding-left: 0%;
+}
+
+.avisoUnitario{
+    //border: 0.1px #241816 solid;
+    //border-radius: 5%;
+    // border-bottom-left-radius: 3%;
+    // border-bottom-right-radius: 3%;
+    // border-top-left-radius:3%;
+    // border-top-right-radius:3%;
+    box-shadow: 0 0 2em rgba(30, 30, 31, 0.932);
+    //max-height: 95%;
+    //background-color: #d3d3d3;
+    
+    
+}
+
+.vecired {
+    color: aliceblue;
+    font-weight: bolder;
+    font-size: x-large;
+    text-align: center;
+}
+
+.nomasSolicitudes {
+    text-align: center;
+    padding: 10px;
+    color: #777;
+  }
+
+  .noEmit{
+    background-color: #AFEEEE;
+    border: 2px #241816 solid;
+    border-bottom-left-radius: 9%;
+    border-bottom-right-radius: 9%;
+    border-top-left-radius:9%;
+    border-top-right-radius:9%;
+    box-shadow: 0 0 2em rgba(30, 30, 31, 0.932);
+}
+
+.tituloCert{
+    font-size: medium;
+    color: #241816;
+}

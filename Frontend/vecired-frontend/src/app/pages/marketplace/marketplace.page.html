@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar class="cabecera">
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/tabs/tab1" color="dark"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="vecired" color="dark">VeciRed</ion-title>
+
+    <ion-buttons routerLink="/main/tabs/crear-publicacion" slot="end">
+      <ion-icon slot="icon-only" name="add-outline" color="dark"></ion-icon>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Titulo -->
+  <ion-select 
+    #sectionSelect
+    style="display: none !important;"
+    [(ngModel)]="comunidadId"
+    (ionChange)="actualizarToken()"
+  >
+    <ion-select-option *ngFor="let comunidad of Comunidad" [value]="comunidad._id">
+      {{ comunidad.nombreComunidad }}
+    </ion-select-option>
+  </ion-select>
+  <ion-grid>
+    <div class="ripple-parent">
+      <ion-row>
+        <ion-col>
+
+        </ion-col>
+        <ion-col class="publicacionTitle ion-text-center">
+          <b> MARKETPLACE </b>
+        </ion-col>
+        <ion-col>
+          <ion-buttons class="cambiarComunidad" (click)="mostrarSelect($event)">
+            <ion-icon slot="icon-only" name="people"></ion-icon>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </ion-grid>
+  <!-- Publicaciones -->
+  <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="recargar($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="6" size-lg="4" *ngFor="let publicacion of publicaciones">
+          <ion-card>
+            <ion-slides pager="true">
+              <ion-slide *ngFor="let imagen of publicacion.imagenes" class="image-slide">
+                <ion-img [src]="imagen" class="slide-image"></ion-img>
+              </ion-slide>
+            </ion-slides>
+            <ion-card-content>
+              <ion-card-title>{{ publicacion.titulo }}</ion-card-title>
+              <p ion-text-wrap>{{ publicacion.descripcion }}</p>
+              <p >Precio: {{ publicacion.precio }}</p>
+              <p >Fecha: {{ formatearFecha(publicacion.fechaCreacion) }}</p>
+              <p >Categoria: {{ publicacion.categoria }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-content>
+
+  <!-- Infinite Scroll -->
+
+  <!--<ion-infinite-scroll threshold="150px" (ionInfinite)="siguientes($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Cargando...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>-->
+  
+
+
+
+</ion-content>

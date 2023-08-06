@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar class="cabecera">
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/tabs/mis-certificados" color="light"></ion-back-button>
+    </ion-buttons>
+  
+    <ion-title class="vecired" color="light">VeciRed</ion-title>
+  
+    <ion-buttons slot="end">   
+      <ion-button disabled>
+        <ion-icon></ion-icon>
+      </ion-button>
+    </ion-buttons>
+      
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--INICIO TITULO-->
+  <ion-grid>
+    <div class="ripple-parent">
+      <ion-row>    
+        <ion-col  class="avisosTitlte ion-text-center">
+          <b>EDITAR CERTIFICADO</b> 
+        </ion-col>
+      </ion-row>     
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </ion-grid>
+  <!--FIN TITULO-->
+  
+  <!---INICIO FORMULARIO-->
+  <ion-grid>
+    <!---INICIO TITULO-->
+    <ion-item>
+      <ion-label position="floating"><b>Título:</b></ion-label>
+      <ion-input type="text" maxlength="50" [(ngModel)]="certificadoEdit.titulo" required ></ion-input>
+    </ion-item>
+    <span class="caracteres">{{ 50 - certificadoEdit.titulo.length }} caracteres restantes</span> 
+    <!---FIN TITULO-->
+    <!---INICIO DESCRIPCION-->
+    <ion-item>
+      <ion-label position="floating"><b>Descripción:</b></ion-label>
+      <ion-textarea type="text" minlength="25" maxlength="1200" [(ngModel)]="certificadoEdit.descripcion" required ></ion-textarea>
+    </ion-item>
+    <span class="caracteres">{{ 1200 - certificadoEdit.descripcion.length }} caracteres restantes</span> 
+    <!---FIN DESCRIPCION-->
+     <!---INICIO REPLEGAL-->
+    <ion-item>
+      <ion-label position="floating"><b>Representante Legal:</b></ion-label>
+      <ion-textarea type="text" minlength="4" maxlength="30" [(ngModel)]="certificadoEdit.replegal" required ></ion-textarea>
+    </ion-item>
+    <span class="caracteres">{{ 30 - certificadoEdit.replegal.length }} caracteres restantes</span> 
+    <!---FIN REPLEGAL-->
+    <!---INICIO CONTACTO-->
+    <ion-item>
+      <ion-label position="floating"><b>Celular de contacto:</b></ion-label>
+      <ion-textarea type="text" maxlength="12" [(ngModel)]="certificadoEdit.contacto" required ></ion-textarea>
+    </ion-item>
+     <!---FIN CONTACTO-->
+
+    <!--INICIO BOTON ACTUALIZAR-->
+    <ion-button    class="editarCerticado"
+                   color="tertiary" 
+                   shape="round" 
+                   expand="full"
+                   (click)="editarCertificado()"
+                   style="margin-top: 30%;"
+                   [disabled]="certificadoEdit.titulo.length <= 4 ||
+                               certificadoEdit.descripcion.length <= 25 ||
+                               certificadoEdit.replegal.length <=4 "
+                               >
+        Actualizar
+      </ion-button>
+      <!--FIN BOTON ACTUALIZAR-->
+
+  </ion-grid>
+  <!---FIN FORMULARIO-->
+</ion-content>

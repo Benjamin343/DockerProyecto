@@ -1,0 +1,38 @@
+:host {
+    ion-content {
+        --background: linear-gradient(135deg, #110A3B, #2f32a0);
+        --padding-top: 10px;
+    }
+}
+
+img {
+    width: 60px;
+}
+
+.bg-transparent {
+    background: transparent;
+
+}
+
+.my-label {
+    font-size: 18px;
+    color: aliceblue;
+}
+
+.my-label2 {
+    font-size: 10px;
+    color: aliceblue;
+}
+
+ion-item {
+    --padding-top: 40px;
+    --padding-bottom: 10px;
+    
+}
+
+.vecired {
+    color: aliceblue;
+    font-weight: bolder;
+    font-size: x-large;
+    text-align: center;
+}

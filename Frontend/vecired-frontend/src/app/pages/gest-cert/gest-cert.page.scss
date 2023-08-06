@@ -1,0 +1,65 @@
+.cabecera{
+    --background: linear-gradient(135deg, #110A3B, #2f32a0);
+}
+
+.noEmit{
+    background-color: #AFEEEE;
+    border: 2px #241816 solid;
+    border-bottom-left-radius: 9%;
+    border-bottom-right-radius: 9%;
+    border-top-left-radius:9%;
+    border-top-right-radius:9%;
+    box-shadow: 0 0 2em rgba(30, 30, 31, 0.932);
+}
+
+.noEmitTitle{
+    
+    color: black; 
+    
+    text-align: center;
+    font-family: monospace;
+}
+
+
+.noEmitImage{
+    //margin-left:30%;
+     width: 40%;
+     height: 50%;
+     max-height: 70%;
+}
+
+.emisorUnitario{
+    //border: 0.1px #241816 solid;
+    //border-radius: 5%;
+    // border-bottom-left-radius: 3%;
+    // border-bottom-right-radius: 3%;
+    // border-top-left-radius:3%;
+    // border-top-right-radius:3%;
+    box-shadow: 0 0 2em rgba(30, 30, 31, 0.932);
+    background-color: #ecebeb;
+    //max-height: 95%;
+    //background-color: #d3d3d3;
+    
+    
+}
+
+.emisorTitle
+{
+    margin-top: -1vw;
+    //background-color: yellow;
+    font-family: monospace;
+    font-size: x-large;
+}
+
+.nomasSolicitudes {
+    text-align: center;
+    padding: 10px;
+    color: #777;
+  }
+
+.vecired {
+    color: aliceblue;
+    font-weight: bolder;
+    font-size: x-large;
+    text-align: center;
+}
