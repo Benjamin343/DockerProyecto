@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar class="cabecera">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/tabs/mis-certificados" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title  class="vecired" color="light">VeciRed</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!--INICIO TITULO-->
+  <ion-grid>
+    <div class="ripple-parent">
+      <ion-row>    
+        <ion-col  class="avisosTitlte ion-text-center">
+          <b>EMISOR DE CERTIFICADOS</b>
+        </ion-col>
+      </ion-row>     
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </ion-grid>
+  <!--FIN TITULO-->
+  <!--INICIO FORM-->
+  <ion-grid>
+  <ion-list >
+    <!---INICIO TITULO-->
+    <ion-item color="none">
+      <ion-label position="floating" color="light" class="my-label">
+        <ion-icon name="key" item-start></ion-icon>
+        RUT
+      </ion-label>
+      <ion-input name="rut" type="text" [(ngModel)]="emisor.rut" class="my-label" placeholder="12.345.678-9" (ionChange)="emisor.rut = formatearRut(emisor.rut)" color="light" required>
+      </ion-input>
+    </ion-item>    
+    <!---FIN TITULO-->
+
+    <!---INICIO DESCRIPCION-->
+    <ion-item color="none">
+      <ion-label position="floating" color="light" class="my-label">
+        <ion-icon name="key" item-start></ion-icon>
+        Motivo de emision de certificado
+      </ion-label>
+      <ion-textarea name="motivo" type="text" [(ngModel)]="emisor.motivo" class="my-label" placeholder="Inserte la razón para la que necesita el certificado aqui." color="light" required>
+      </ion-textarea>
+    </ion-item>
+    <span class="caracteres">{{ 250 - emisor.motivo.length }} caracteres restantes</span> 
+    <!---FIN DESCRIPCION-->
+
+    
+      <ion-button  class="crearCert"
+                   color="tertiary" 
+                   shape="round" 
+                   expand="full"
+                   (click)="crearCert()"
+                   style="margin-top: 30%;"
+                   [disabled]="emisor.motivo.length <= 10  ||
+                   emisor.rut.length < 1">
+        Pedir Certificado
+      </ion-button>
+    
+     
+  </ion-list>
+</ion-grid>
+
+  <!--FIN FORM   -->
+
+
+
+  
+
+</ion-content>
