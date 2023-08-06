@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar class="cabecera">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/tabs/tab1" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title  class="vecired" color="light">VeciRed</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!--INICIO TITULO-->
+  <ion-grid>
+    <div class="ripple-parent">
+      <ion-row>    
+        <ion-col  class="avisosTitlte ion-text-center">
+          <b>CREAR CERTIFICADO</b>
+        </ion-col>
+      </ion-row>     
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </ion-grid>
+  <!--FIN TITULO-->
+  <!--INICIO FORM-->
+  <ion-grid>
+  <ion-list >
+    <!---INICIO TITULO-->
+    <ion-item>
+      <ion-label position="floating"><b>Título:</b></ion-label>
+      <ion-input type="text" minlength="4" placeholder="Certificado de residencia veciRed" maxlength="30" [(ngModel)]="certificado.titulo" required ></ion-input>
+    </ion-item>
+    <span class="caracteres">{{ 30 - certificado.titulo.length }} caracteres restantes </span> 
+    
+    <!---FIN TITULO-->
+
+    <!---INICIO DESCRIPCION-->
+    <ion-item>
+      <ion-label position="floating"><b>Descripción:</b></ion-label>
+      <ion-textarea type="text" minlength="30" placeholder="Inserte que es lo que dira el texto dentro del certificado." maxlength="1200" [(ngModel)]="certificado.descripcion"  required ></ion-textarea>
+      
+    </ion-item>
+    <span class="caracteres">{{ 1200 - certificado.descripcion.length }} caracteres restantes</span> 
+    <!---FIN DESCRIPCION-->
+
+        <!---INICIO DESCRIPCION-->
+        <ion-item>
+          <ion-label position="floating"><b>Representante Legal:</b></ion-label>
+          <ion-input type="text" minlength="3" placeholder="Johann Mastropiero" maxlength="30" [(ngModel)]="certificado.replegal"  required ></ion-input>
+          
+        </ion-item>
+        <span class="caracteres">{{ 30 - certificado.replegal.length }} caracteres restantes</span> 
+        <!---FIN DESCRIPCION-->
+            <!---INICIO DESCRIPCION-->
+    <ion-item>
+      <ion-label position="floating"><b>Contacto:</b></ion-label>
+      <ion-input type="text" minlength="3" placeholder="+56912345678" maxlength="250" [(ngModel)]="certificado.contacto"  required ></ion-input>
+      
+    </ion-item>
+    <!---FIN DESCRIPCION-->
+
+    
+      <ion-button  class="crearCert"
+                   color="tertiary" 
+                   shape="round" 
+                   expand="full"
+                   (click)="crearCert()"
+                   style="margin-top: 30%;"
+                   >
+        Publicar
+      </ion-button>
+    
+     
+  </ion-list>
+</ion-grid>
+
+  <!--FIN FORM   -->
+
+
+
+  
+
+</ion-content>
