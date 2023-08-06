@@ -1,0 +1,8 @@
+{
+  "name": "veciRed",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}
