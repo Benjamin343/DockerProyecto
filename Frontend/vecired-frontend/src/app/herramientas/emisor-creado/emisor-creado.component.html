@@ -1,0 +1,46 @@
+<ion-card class="emisorUnitario">
+  <ion-card-header >
+  <ion-card-subtitle  class=" fontColor ion-text-center">
+    <ion-icon name="body"></ion-icon>
+    {{emisor.comunidad.nombreComunidad}}
+  </ion-card-subtitle>
+  <ion-card-subtitle  class=" fontColor ion-text-center">
+    <ion-icon name="document-text-outline"></ion-icon>
+    {{emisor.certificado.titulo}}
+  </ion-card-subtitle>
+  <ion-card-title class="ion-text-center">
+    <b>{{emisor.usuario.nombre}}</b>
+  </ion-card-title>
+  <ion-card-content class="fontColor ion-text-center">
+    <ion-icon name="chatbubble-ellipses-outline" ></ion-icon>
+    {{emisor.motivo}}
+    <ion-row>
+      <ion-col>
+          <ion-button  
+                       class="aceptarVecino"
+                       id="aceptarVe"
+                       color="success"
+                       size="small"
+                       style="width: 84%;"
+                       (click)="aprobarSolicitud(emisor._id)"
+          >               
+           aceptar
+          </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button    class="rechazarVecino"
+                       color="danger"
+                       size="small"
+                       (click)="rechazarSolicitud(emisor._id)"
+          >               
+           rechazar
+          </ion-button>
+      </ion-col>
+    </ion-row>
+
+
+  </ion-card-content>
+
+  </ion-card-header>
+  
+</ion-card>
