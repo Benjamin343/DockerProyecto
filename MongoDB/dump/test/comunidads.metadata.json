@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"nombreComunidad":{"$numberInt":"1"}},"name":"nombreComunidad_1","background":true,"unique":true}],"uuid":"d0c22d6c210f4cfa8feca99a6bbb77f6","collectionName":"comunidads","type":"collection"}
