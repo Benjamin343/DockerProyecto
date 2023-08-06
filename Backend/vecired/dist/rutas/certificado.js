@@ -1,0 +1,309 @@
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const certificadoBDmodel_1 = require("../modelos/certificadoBDmodel");
+const autenticacion_1 = require("../middlewares/autenticacion");
+const comunidadBDModel_1 = require("../modelos/comunidadBDModel");
+const usuarioBDModel_1 = require("../modelos/usuarioBDModel");
+const sharp_1 = __importDefault(require("sharp"));
+const fs_1 = require("fs");
+const path_1 = __importDefault(require("path"));
+const rutasCertificados = (0, express_1.Router)();
+const sanitizeHtml = require('sanitize-html');
+rutasCertificados.post('/crear', [autenticacion_1.verificaToken], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // Validaciones
+    // logo default de vecired
+    const defaultLogoPath = 'logosCertificados/veciRed.png';
+    //si se sube un logo nuevo
+    let logoPath = '';
+    if (!req.files || !req.files.logo) {
+        // si no se sube logo, toma vecired logo
+        logoPath = defaultLogoPath;
+    }
+    else {
+        //si sube logo,  toma la imagen y hace las validaciones
+        const logoFile = req.files.logo;
+        if (!logoFile.mimetype.startsWith('image/png')) {
+            return res.json({
+                ok: false,
+                mensaje: 'El archivo debe ser de tipo PNG.',
+            });
+        }
+        //se guarda en logosCertificados, se tiene que analizar si se haran carpetas secundarias, para que no coincidan nombres 
+        logoPath = 'logosCertificados/' + Date.now() + '.png';
+        try {
+            // uso de sharp para resizear imagen, se trajo arriba para  poder hacer la funcion del logo vecired
+            yield (0, sharp_1.default)(logoFile.data)
+                .resize(300, 300)
+                .toFile(logoPath);
+        }
+        catch (err) {
+            return res.json({
+                ok: false,
+                mensaje: 'Error al procesar el logo.',
+            });
+        }
+    }
+    // Validación de caracteres en el título
+    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ ]{3,50})+$/g;
+    if (caracteres.test(req.body.titulo) === false) {
+        return res.json({
+            ok: false,
+            mensaje: 'Caracteres inválidos en el título, ingrese otro nombre.'
+        });
+    }
+    if (req.body.titulo.length > 50) {
+        return res.json({
+            ok: false,
+            mensaje: 'Título de certificado demasiado largo.'
+        });
+    }
+    if (req.body.descripcion.length > 1200) {
+        return res.json({
+            ok: false,
+            mensaje: 'Descripción del correo demasiado larga, intente acortar texto.'
+        });
+    }
+    // se usa sanitize-html para limpiarla de cualquier codigo malicioso
+    const descripcionSanitizada = sanitizeHtml(req.body.descripcion);
+    var caracteresrep = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ ]{3,30})+$/g;
+    if (caracteresrep.test(req.body.replegal) == false) {
+        return res.json({
+            ok: false,
+            mensaje: 'Texto con caracteres invalidos.'
+        });
+    }
+    if (req.body.replegal.length > 30) {
+        return res.json({
+            ok: false,
+            mensaje: 'Nombre del representante demasiado largo.'
+        });
+    }
+    if (req.body.replegal.length < 3) {
+        return res.json({
+            ok: false,
+            mensaje: 'Nombre del representante demasiado corto.'
+        });
+    }
+    // Validación del formato del número de contacto
+    var caracterescelular = /^(\+?56)?(\s?)(0?9)(\s?)[98765432]\d{7}$/;
+    if (caracterescelular.test(req.body.contacto) === false) {
+        return res.json({
+            ok: false,
+            mensaje: 'Formato de celular no válido, intente de nuevo.'
+        });
+    }
+    try {
+        // Se verifica si la flag de emitirCertificado es igual a 0, si es asi, no se puede crear un certificado
+        const comunidad = yield comunidadBDModel_1.Comunidad.findById(req.usuario.comunidad);
+        if (!comunidad) {
+            return res.json({
+                ok: false,
+                mensaje: 'No se encontró la comunidad en la base de datos.'
+            });
+        }
+        if (comunidad.emitirCertificado === 0) {
+            return res.json({
+                ok: false,
+                mensaje: 'La comunidad no puede emitir certificados.'
+            });
+        }
+        // Revisar si  existe el usuario en la base de datos
+        const usuario = yield usuarioBDModel_1.Usuario.findById(req.usuario._id);
+        if (!usuario) {
+            return res.json({
+                ok: false,
+                mensaje: 'No se encontró el usuario en la base de datos.'
+            });
+        }
+        // Revisar si el rol 1 (privilegiado) pertenece al la comunidad 
+        const index = usuario.comunidad.findIndex(comunidad => comunidad.toString() === req.usuario.comunidad);
+        if (index === -1 || usuario.rol[index] !== 1) {
+            return res.json({
+                ok: false,
+                mensaje: 'No tienes permisos para crear un certificado en esta comunidad.'
+            });
+        }
+        // Crear el certificado
+        const dataCertificado = {
+            titulo: req.body.titulo,
+            descripcion: descripcionSanitizada,
+            replegal: req.body.replegal,
+            contacto: req.body.contacto,
+            logo: logoPath,
+            comunidad: req.usuario.comunidad
+        };
+        const certificadoBD = yield certificadoBDmodel_1.Certificado.create(dataCertificado);
+        res.json({
+            ok: true,
+            dataCertificado: certificadoBD
+        });
+    }
+    catch (err) {
+        console.error('Error:', err); // Agregar esta línea para imprimir el error en la consola
+        res.json({
+            ok: false,
+            err
+        });
+    }
+}));
+//actualizar certificado
+rutasCertificados.post('/update', autenticacion_1.verificaToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const certificadoId = req.body._id;
+        // Buscar el certificado por ID
+        const certificado = yield certificadoBDmodel_1.Certificado.findById(certificadoId);
+        if (!certificado) {
+            return res.json({
+                ok: false,
+                mensaje: 'No existe el certificado especificado',
+            });
+        }
+        // Obtener el ID de la comunidad asociada al certificado
+        const comunidadId = certificado.comunidad.toString();
+        // Verificar si el usuario pertenece a la comunidad y tiene rol igual a 1
+        const usuario = yield usuarioBDModel_1.Usuario.findById(req.usuario._id);
+        if (!usuario) {
+            return res.json({
+                ok: false,
+                mensaje: 'No se encontró el usuario en la base de datos',
+            });
+        }
+        const index = usuario.comunidad.findIndex((comunidad) => comunidad.toString() === comunidadId);
+        if (index === -1 || usuario.rol[index] !== 1) {
+            // El usuario no tiene los permisos necesarios para actualizar el certificado
+            return res.json({
+                ok: false,
+                mensaje: 'No tienes permisos para actualizar este certificado en la comunidad especificada',
+            });
+        }
+        // Logo handling logic from the previous code
+        let logoPath = req.body.logo;
+        if (req.files && req.files.logo) {
+            const logoFile = req.files.logo;
+            if (!logoFile.mimetype.startsWith('image/png')) {
+                return res.json({
+                    ok: false,
+                    mensaje: 'El archivo debe ser de tipo PNG.',
+                });
+            }
+            if (logoFile.name !== 'veciRed.png') {
+                // If a different logo is uploaded, process and save it
+                logoPath = 'logosCertificados/' + Date.now() + '.png';
+                try {
+                    const processedImage = yield (0, sharp_1.default)(logoFile.data)
+                        .resize(300, 300)
+                        .toFile(logoPath);
+                    if (processedImage) {
+                        console.log("Processed Image:", processedImage);
+                        // Delete the existing logo file from the server (if it's not "veciRed.png")
+                        if (certificado.logo !== 'logosCertificados/veciRed.png') {
+                            const existingLogoPath = path_1.default.resolve(certificado.logo);
+                            yield fs_1.promises.unlink(existingLogoPath);
+                        }
+                    }
+                }
+                catch (err) {
+                    console.error("Error while processing the logo:", err);
+                    return res.json({
+                        ok: false,
+                        mensaje: 'Error al procesar el logo.',
+                    });
+                }
+            }
+        }
+        // Validaciones
+        // Validación de caracteres en el título
+        var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ ]{3,50})+$/g;
+        if (caracteres.test(req.body.titulo) === false) {
+            return res.json({
+                ok: false,
+                mensaje: 'Caracteres inválidos en el título, ingrese otro nombre.',
+            });
+        }
+        if (req.body.titulo.length > 50) {
+            return res.json({
+                ok: false,
+                mensaje: 'Título de certificado demasiado largo.',
+            });
+        }
+        if (req.body.descripcion.length > 1200) {
+            return res.json({
+                ok: false,
+                mensaje: 'Descripción del correo demasiado larga, intente acortar texto.',
+            });
+        }
+        const descripcionSanitizada = sanitizeHtml(req.body.descripcion);
+        // Validación del formato del número de contacto
+        var caracterescelular = /^(\+?56)?(\s?)(0?9)(\s?)[98765432]\d{7}$/;
+        if (caracterescelular.test(req.body.contacto) === false) {
+            return res.json({
+                ok: false,
+                mensaje: 'Formato de celular no válido, intente de nuevo.',
+            });
+        }
+        // Update the certificado with the new data
+        const dataCertificado = {
+            titulo: req.body.titulo,
+            descripcion: descripcionSanitizada,
+            replegal: req.body.replegal,
+            contacto: req.body.contacto,
+            logo: logoPath,
+        };
+        const certificadoActualizado = yield certificadoBDmodel_1.Certificado.findByIdAndUpdate(certificadoId, dataCertificado, { new: true });
+        if (!certificadoActualizado) {
+            return res.json({
+                ok: false,
+                mensaje: 'No se pudo actualizar el certificado',
+            });
+        }
+        res.json({
+            ok: true,
+            certificado: certificadoActualizado,
+        });
+    }
+    catch (error) {
+        console.log(error);
+        return res.json({
+            ok: false,
+            mensaje: 'Error al actualizar el certificado',
+        });
+    }
+}));
+rutasCertificados.get('/', [autenticacion_1.verificaToken], (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const comunidadId = request.usuario.comunidad;
+        const certificados = yield certificadoBDmodel_1.Certificado.find({ comunidad: comunidadId })
+            .populate({ path: 'comunidad' })
+            .exec();
+        if (certificados.length === 0) {
+            return response.json({
+                ok: true,
+                mensaje: 'La comunidad no presenta certificados válidos para emitir',
+            });
+        }
+        response.json({
+            certificados,
+            ok: true
+        });
+    }
+    catch (error) {
+        response.status(500).json({
+            ok: false,
+            mensaje: 'Error al obtener los certificados',
+        });
+    }
+}));
+exports.default = rutasCertificados;
