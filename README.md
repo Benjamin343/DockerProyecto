@@ -79,8 +79,7 @@ docker run --rm -ti -p 3000:3000
 
 ### Dockerfile Frontend
 
-*** Debido a el funcionamiento de Docker, el Dockerfile de frontend no funciona, ya que Docker no maneja de manera correcta un contenedor con una version de NodeJS antigua (Node 12.14.1) ***
-                                                            *** Lamentamos este inconveniente, pero esta fuera de nuestro poder ***
+*** Debido al funcionamiento de Docker, el Dockerfile de frontend no funciona, ya que Docker no maneja de manera correcta un contenedor con una version de NodeJS antigua (Node 12.14.1) ***
 
 - Entrar a la carpeta llamada 'Dockerfile Frontend'
 ```bash
