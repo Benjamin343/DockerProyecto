@@ -1,0 +1,95 @@
+<ion-app>
+
+  <ion-menu (ionWillOpen)="menuOpened()" side="start" menuId="first" contentId="main">
+    <ion-header>
+      <ion-toolbar style="--background: linear-gradient(135deg, #110A3B, #2f32a0);">
+        <ion-title color="dark">Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/main/tabs/comunidad">
+          <ion-icon name="people-outline" slot="start"></ion-icon>
+          Mis comunidades
+        </ion-item>
+        <ion-item *ngIf="rol == 1" routerLink="/main/tabs/solicitud">
+          <ion-icon slot="start" name="person-add-outline"></ion-icon>
+          Mis solicitudes <span *ngIf="largoSolicitud >= 1" slot="end" class="solicitud">+{{largoSolicitud}}</span>
+        </ion-item>
+        <ion-item *ngIf="rol == 1" routerLink="/main/tabs/gestionar">
+          <ion-icon slot="start" name="body-outline"></ion-icon>
+          Miembros
+        </ion-item>
+           <!-- ACORDION CERTIFICADOS -->
+           <ion-item (click)="toggleCertificados()">
+            <ion-icon name="document-text-outline" slot="start"></ion-icon>
+            Certificados
+            <ion-icon [name]="accordionAbierto? 'chevron-up-outline' : 'chevron-down-outline'" slot="end"></ion-icon>
+          </ion-item>
+          <ion-list *ngIf="accordionAbierto">
+            <ion-menu-toggle>
+              <ion-grid >
+              <ion-item class="accordionDer" routerLink="/main/tabs/mis-certificados">
+                <ion-icon name="briefcase-outline" slot="start"></ion-icon>
+                Ver Certificados
+              </ion-item>
+              <ion-item  class="accordionDer" routerLink="/main/tabs/estado-cert">
+                <ion-icon name="ribbon-outline" slot="start"></ion-icon>
+                Estado de mis solicitudes
+              </ion-item>
+              <ion-item *ngIf="rol == 1" class="accordionDer" routerLink="/main/tabs/gest-cert">
+                <ion-icon name="file-tray-full-outline" slot="start"></ion-icon>
+                Administrar certificados
+              </ion-item>
+            </ion-grid>
+            </ion-menu-toggle>
+          </ion-list>
+          <!-- ACORDION -->
+
+          <!-- ACORDION MARKETPLACE -->
+          <ion-item (click)="toggleMarketplace()">
+            <ion-icon name="basket-outline" slot="start"></ion-icon>
+            Marketplace
+            <ion-icon [name]="accordionMarketplce? 'chevron-up-outline' : 'chevron-down-outline'" slot="end"></ion-icon>
+          </ion-item>
+          <ion-list *ngIf="accordionMarketplace">
+            <ion-menu-toggle>
+              <ion-grid>
+                <ion-item class="accordionDer" routerLink="/main/tabs/marketplace">
+                  <ion-icon name="search-outline" slot="start"></ion-icon>
+                  Ver Publicaciones
+                </ion-item>
+                <ion-item class="accordionDer" routerLink="/main/tabs/mis-publicaciones">
+                  <ion-icon name="clipboard-outline" slot="start"></ion-icon>
+                  Mis Publicaciones
+                </ion-item>
+                <ion-item class="accordionDer" routerLink="/main/tabs/renovar-publicacion">
+                  <ion-icon name="refresh-circle-outline" slot="start"></ion-icon>
+                  Renovar Publicaciones
+                </ion-item>
+              </ion-grid>
+            </ion-menu-toggle>
+          </ion-list>
+          <!-- ACORDION MARKETPLACE-->
+        <ion-item *ngIf="rol == 1" routerLink="/main/tabs/acuerdos">
+          <ion-icon name="megaphone-outline" slot="start"></ion-icon>
+          Acuerdos
+        </ion-item>
+        <ion-item routerLink="/main/tabs/votaciones">
+          <ion-icon name="podium-outline" slot="start"></ion-icon>
+          Votaciones
+        </ion-item>
+        <ion-item (click)="goToMisAvisos()">
+          <ion-icon name="receipt-outline" slot="start"></ion-icon>
+          Mis avisos
+        </ion-item>
+        <ion-item (click)="logout()">
+          <ion-icon name="log-out-outline" slot="start"></ion-icon>
+          Cerrar Sesión
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>
