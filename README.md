@@ -46,12 +46,15 @@ apt-get install  -y curl git
 
 
 Clonar el repositorio de github
+
 ```
 git clone https://github.com/Benjamin343/DockerProyecto
 ```
 
 ## Instalar NVM 
+
 - Ejecutar el siguiente comando en una terminal bash
+
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 ```
@@ -63,11 +66,13 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 En nuestro caso ocuparemos Node.JS 16.14.2 para Backend y Node.JS 12.14.1 para Frontend
 
 - Para instalar Node.JS 16.14.2 ejecuta el siguiente comando en una terminal bash
+
 ```
 nvm install 16.14.2
 ```
 
 - Para instalar Node.JS 12.14.1 ejecuta el siguiente comando en una terminal bash
+
 ```
 nvm install 12.14.1
 ```
@@ -78,16 +83,19 @@ nvm install 12.14.1
 ```
 nvm use 16.14.2
 ```
+
 - Entrar en la carpeta de /Backend/vecired y ejecutar los siguientes comandos:
 ```
 npm install
 ```
+
 ## Ejecución entorno producción Backend
 ```
 
 ```
 
 ## Ejecución entorno desarrollo Backend
+
 - Para la ejecución del entorno de desarrollo debes de dirigirte al directorio /Backend/vecired y ejecutar el siguiente comando:
 
 ```
@@ -132,17 +140,50 @@ npm install -g @ionic/cli@7.1.1
 ```
 
 ## Ejecución entorno desarrollo Frontend
-- Para la ejecución del entorno de desarrollo debe de dirigirte al directorio /Frontend/vecired-frontend y ejecutar el siguiente comando:
+
+#Si desea levantar el entorno de desarrollo como localhost, debe de seguir los siguientes pasos:
+- Para la ejecución del entorno de desarrollo debe de dirigirse al directorio /Frontend/vecired-frontend y ejecutar el siguiente comando:
 ```
 ionic serve
 ```
-- Si quiere ejecutar el entorno de desarrolo debe
+- Si desea definir un puerto, debe ejecutar el comando de la siguiente manera:
+```
+ionic serve -p PUERTO
+```
 
-- En el caso de que no funcionara, utilizar la version 16.14.2 como la version predeterminada:
+#Si desea levantar el entorno de desarrollo con una IP externa, debe de seguir los siguientes pasos:
+Si quiere ejecutar el entorno de desarrolo, debe declararlo en el comando de la siguiente manera:
+```
+ionic serve --external
+```
+- Si desea definir un puerto, debe ejecutar el comando de la siguiente manera:
+```
+ionic serve --external -p PUERTO
+```
+
+#Solución de problemas Frontend
+En el caso de que no funcionara la ejecucion del entorno de desarrollo, utilizar la version 16.14.2 como la version predeterminada:
+
 ```
 nvm use 16.14.2
 ```
 
+Despues debe de ejecutar los siguientes comandos para instalar las dependencias necesarias del frontend:
+
+npm install
+```
+npm install
+```
+
+Instalar Cordova
+```
+npm install -g cordova
+```
+
+Instalar Ionic 7.1.1
+```
+npm install -g @ionic/cli@7.1.1
+```
 
 
 ## Credenciales de Base de datos y variables de ambiente
