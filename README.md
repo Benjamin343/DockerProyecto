@@ -32,21 +32,17 @@ Antes de todo debe ejecutar los siguientes comandos:
 su -
 ```
 
-Despues:
-
+Despues ejecutar:
 ```
 apt-get update
 ```
 
-E instalar curl
-
+Instalar curl
 ```
 apt-get install  -y curl git
 ```
 
-
-Clonar el repositorio de github
-
+Y finalmente clonar el repositorio de github
 ```
 git clone https://github.com/Benjamin343/DockerProyecto
 ```
