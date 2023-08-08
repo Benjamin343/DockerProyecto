@@ -32,6 +32,50 @@ Aparte, tambien se utiliza el siguiente software:
 ```
 git clone https://github.com/Benjamin343/DockerProyecto
 ```
+
+## Instalar NVM 
+- Ejecutar el siguiente comando en una terminal bash
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+```
+
+- Reinicia la terminal
+
+## Instalar Node.js
+
+- En nuestro caso ocuparemos Node.JS 16.14.2 para Backend y Node.JS 12.14.1 para Frontend
+
+- Para instalar Node.JS 16.14.2 ejecuta el siguiente comando en una terminal bash
+```
+nvm install 16.14.2
+```
+- Y despues establece la version recién instalada como la version predeterminada
+```
+nvm use 16.14.2
+```
+
+- Para instalar Node.JS 12.14.1 ejecuta el siguiente comando en una terminal bash
+```
+nvm install 12.14.1
+```
+- Y despues establece la version recién instalada como la version predeterminada
+```
+nvm use 12.14.1
+```
+
+### Instalar Cordova e Ionic
+
+- Para esto necesitaras dirigirte al directorio de /Frontend/vecired-frontend y ejecutar los siguientes comandos:
+Cordova
+```
+npm install -g cordova
+```
+
+Ionic 7.1.1
+```
+npm install -g @ionic/cli@7.1.1
+```
+
 ### Instalar dependencias del backend
 - Entrar en la carpeta de /Backend/vecired y ejecutar los siguientes comandos:
 ```
@@ -41,10 +85,16 @@ npm install
 ```
 
 ```
+
+### Ejecución entorno desarrollo Backend
+```
+node dist/
+```
 ### Instalar dependencias del Frontend
 ```
 npm install
 ```
+
 ### Ejecución entorno producción Frontend
 #### Crear la build de producción
 ```
@@ -53,6 +103,10 @@ npm install
 #### Iniciar el ambiente de producción
 ```
 
+```
+### Ejecución entorno desarrollo Frontend
+```
+ionic serve
 ```
 
 ### Credenciales de Base de datos y variables de ambiente
