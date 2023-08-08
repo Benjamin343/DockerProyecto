@@ -102,15 +102,16 @@ node dist/
 nvm use 12.14.1
 ```
 
+- Despues, entrar en la carpeta de /Frontend/vecired-frontend y ejecutar el siguiente comando:
+```
+npm install
+```
+
 - En el caso de que no funcionara, utilizar la version 16.14.2 como la version predeterminada:
 ```
 nvm use 16.14.2
 ```
 
-- Despues, entrar en la carpeta de /Frontend/vecired-frontend y ejecutar el siguiente comando:
-```
-npm install
-```
 ## Instalar Cordova e Ionic
 
 - Para esto necesitaras dirigirte al directorio de /Frontend/vecired-frontend y ejecutar los siguientes comandos:
