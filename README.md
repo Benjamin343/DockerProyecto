@@ -28,6 +28,18 @@ Aparte, tambien se utiliza el siguiente software:
 - Para la instalacion y despliegue de la base de datos existente, debe dirigirse a la carpeta MongoDB, en la cual se encontrara los pasos a seguir para replicar la base de datos de MongoDB Atlas.
 
 ## Configuraciones de Ejecución para Entorno de Desarrollo/Producción
+-Antes de todo debemos ejecutar los siguientes comandos:
+```
+apt-get update
+```
+
+E instalar curl
+
+```
+apt-get install  -y curl git
+```
+
+
 - Clonar el repositorio de github
 ```
 git clone https://github.com/Benjamin343/DockerProyecto
