@@ -1,5 +1,4 @@
-# Nombre del Proyecto #
-Desarrollo de módulos y funcionalidades para aplicación móvil para gestión de comunidades pequeñas y medianas en Chile
+# VeciRed #
 
 ## Descripción del proyecto
 
@@ -22,7 +21,7 @@ Aparte, tambien se utiliza el siguiente software:
 - Python 2.7.18
 - SASS (SCSS)
 
--- Las dependencias del proyecto, tanto Backend como Frontend, se encuentran en sus respectivos package.json.
+* Las dependencias del proyecto, tanto Backend como Frontend, se encuentran en sus respectivos package.json.
 
 ## Configuracion de la base de datos
 - Para la instalacion y despliegue de la base de datos existente, debe dirigirse a la carpeta MongoDB, en la cual se encontrara los pasos a seguir para replicar la base de datos de MongoDB Atlas.
@@ -46,7 +45,7 @@ apt-get install  -y curl git
 ```
 
 
-- Clonar el repositorio de github
+Clonar el repositorio de github
 ```
 git clone https://github.com/Benjamin343/DockerProyecto
 ```
@@ -57,24 +56,24 @@ git clone https://github.com/Benjamin343/DockerProyecto
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 ```
 
-- Reinicia la terminal
+- Reiniciar la terminal
 
 ## Instalar Node.js
 
-- En nuestro caso ocuparemos Node.JS 16.14.2 para Backend y Node.JS 12.14.1 para Frontend
+En nuestro caso ocuparemos Node.JS 16.14.2 para Backend y Node.JS 12.14.1 para Frontend
 
 - Para instalar Node.JS 16.14.2 ejecuta el siguiente comando en una terminal bash
 ```
 nvm install 16.14.2
 ```
 
-
 - Para instalar Node.JS 12.14.1 ejecuta el siguiente comando en una terminal bash
 ```
 nvm install 12.14.1
 ```
 
-### Instalar dependencias del backend
+## Instalar dependencias del backend
+
 - Primero que todo, establece la version 16.14.2 como la version predeterminada
 ```
 nvm use 16.14.2
@@ -83,19 +82,19 @@ nvm use 16.14.2
 ```
 npm install
 ```
-### Ejecución entorno producción Backend
+## Ejecución entorno producción Backend
 ```
 
 ```
 
-### Ejecución entorno desarrollo Backend
+## Ejecución entorno desarrollo Backend
 - Para la ejecución del entorno de desarrollo debes de dirigirte al directorio /Backend/vecired y ejecutar el siguiente comando:
 
 ```
 node dist/
 ```
 
-### Instalar dependencias del Frontend
+## Instalar dependencias del Frontend
 
 - Primero que todo, establece la version 12.14.1 como la version predeterminada
 ```
@@ -107,49 +106,53 @@ nvm use 12.14.1
 npm install
 ```
 
-- En el caso de que no funcionara, utilizar la version 16.14.2 como la version predeterminada:
-```
-nvm use 16.14.2
-```
-
 ## Instalar Cordova e Ionic
 
-- Para esto necesitaras dirigirte al directorio de /Frontend/vecired-frontend y ejecutar los siguientes comandos:
+Para esto necesitaras dirigirte al directorio de /Frontend/vecired-frontend y ejecutar los siguientes comandos:
 
-Cordova
+- Cordova
 ```
 npm install -g cordova
 ```
 
-Ionic 7.1.1
+- Ionic 7.1.1
 ```
 npm install -g @ionic/cli@7.1.1
 ```
 
 
-### Ejecución entorno producción Frontend
-#### Crear la build de producción
+## Ejecución entorno producción Frontend
+### Crear la build de producción
 ```
 
 ```
-#### Iniciar el ambiente de producción
+### Iniciar el ambiente de producción
 ```
 
 ```
-### Ejecución entorno desarrollo Frontend
-- Para la ejecución del entorno de desarrollo debes de dirigirte al directorio /Frontend/vecired-frontend y ejecutar el siguiente comando:
+
+## Ejecución entorno desarrollo Frontend
+- Para la ejecución del entorno de desarrollo debe de dirigirte al directorio /Frontend/vecired-frontend y ejecutar el siguiente comando:
 ```
 ionic serve
 ```
+- Si quiere ejecutar el entorno de desarrolo debe
 
-### Credenciales de Base de datos y variables de ambiente
-#### Backend
+- En el caso de que no funcionara, utilizar la version 16.14.2 como la version predeterminada:
+```
+nvm use 16.14.2
+```
+
+
+
+## Credenciales de Base de datos y variables de ambiente
+### Backend
 - Navegar hasta el directorio /DockerProyecto/Backend/vecired/clases/ o /DockerProyecto/Backend/vecired/dist/clases/ y configurar el puerto deseado en el archivo 'servidor.ts' o 'servidor.js' respectivamente.
 
-#### Frontend
+### Frontend
 - Navegar hasta el directorio /DockerProyecto/Frontend/vecired-frontend/src/enviroments y configurar el puerto deseado en el archivo 'enviroment.prod.ts' o 'enviroment', dependiendo de si quiere levantar una version de produccion o desarrollo respectivamente.
 
-### Docker
+## Docker
 Con una terminal, moverse al directorio del repositorio clonado.
 Una vez dentro de este, debe dirigirse al directorio 'Dockerfiles' y moverse a las siguientes 2 carpetas:
 
