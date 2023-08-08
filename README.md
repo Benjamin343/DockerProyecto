@@ -49,34 +49,18 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 ```
 nvm install 16.14.2
 ```
-- Y despues establece la version recién instalada como la version predeterminada
-```
-nvm use 16.14.2
-```
+
 
 - Para instalar Node.JS 12.14.1 ejecuta el siguiente comando en una terminal bash
 ```
 nvm install 12.14.1
 ```
-- Y despues establece la version recién instalada como la version predeterminada
-```
-nvm use 12.14.1
-```
-
-### Instalar Cordova e Ionic
-
-- Para esto necesitaras dirigirte al directorio de /Frontend/vecired-frontend y ejecutar los siguientes comandos:
-Cordova
-```
-npm install -g cordova
-```
-
-Ionic 7.1.1
-```
-npm install -g @ionic/cli@7.1.1
-```
 
 ### Instalar dependencias del backend
+- Primero que todo, establece la version 16.14.2 como la version predeterminada
+```
+nvm use 16.14.2
+```
 - Entrar en la carpeta de /Backend/vecired y ejecutar los siguientes comandos:
 ```
 npm install
@@ -92,10 +76,37 @@ npm install
 ```
 node dist/
 ```
+
 ### Instalar dependencias del Frontend
+
+- Primero que todo, establece la version 12.14.1 como la version predeterminada
+```
+nvm use 12.14.1
+```
+
+- En el caso de que no funcionara, utilizar la version 16.14.2 como la version predeterminada:
+```
+nvm use 16.14.2
+```
+
+- Despues, entrar en la carpeta de /Frontend/vecired-frontend y ejecutar el siguiente comando:
 ```
 npm install
 ```
+## Instalar Cordova e Ionic
+
+- Para esto necesitaras dirigirte al directorio de /Frontend/vecired-frontend y ejecutar los siguientes comandos:
+
+Cordova
+```
+npm install -g cordova
+```
+
+Ionic 7.1.1
+```
+npm install -g @ionic/cli@7.1.1
+```
+
 
 ### Ejecución entorno producción Frontend
 #### Crear la build de producción
