@@ -161,7 +161,7 @@ ionic serve --external
 ionic serve --external -p PUERTO
 ```
 
-# Solución de problemas Frontend
+## Solución de problemas Frontend
 En el caso de que no funcionara la ejecucion del entorno de desarrollo, utilizar la version 16.14.2 como la version predeterminada:
 
 ```
