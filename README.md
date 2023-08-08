@@ -87,6 +87,8 @@ npm install
 ```
 
 ### Ejecución entorno desarrollo Backend
+- Para la ejecución del entorno de desarrollo debes de dirigirte al directorio /Backend/vecired y ejecutar el siguiente comando:
+
 ```
 node dist/
 ```
@@ -105,6 +107,7 @@ npm install
 
 ```
 ### Ejecución entorno desarrollo Frontend
+- Para la ejecución del entorno de desarrollo debes de dirigirte al directorio /Frontend/vecired-frontend y ejecutar el siguiente comando:
 ```
 ionic serve
 ```
