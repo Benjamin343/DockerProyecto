@@ -141,7 +141,7 @@ npm install -g @ionic/cli@7.1.1
 
 ## Ejecución entorno desarrollo Frontend
 
-###Si desea levantar el entorno de desarrollo como localhost, debe de seguir los siguientes pasos:
+### Si desea levantar el entorno de desarrollo como localhost, debe de seguir los siguientes pasos:
 - Para la ejecución del entorno de desarrollo debe de dirigirse al directorio /Frontend/vecired-frontend y ejecutar el siguiente comando:
 ```
 ionic serve
@@ -151,7 +151,7 @@ ionic serve
 ionic serve -p PUERTO
 ```
 
-###Si desea levantar el entorno de desarrollo con una IP externa, debe de seguir los siguientes pasos:
+### Si desea levantar el entorno de desarrollo con una IP externa, debe de seguir los siguientes pasos:
 Si quiere ejecutar el entorno de desarrolo, debe declararlo en el comando de la siguiente manera:
 ```
 ionic serve --external
@@ -161,7 +161,7 @@ ionic serve --external
 ionic serve --external -p PUERTO
 ```
 
-#Solución de problemas Frontend
+# Solución de problemas Frontend
 En el caso de que no funcionara la ejecucion del entorno de desarrollo, utilizar la version 16.14.2 como la version predeterminada:
 
 ```
