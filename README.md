@@ -30,6 +30,12 @@ Aparte, tambien se utiliza el siguiente software:
 ## Configuraciones de Ejecución para Entorno de Desarrollo/Producción
 -Antes de todo debemos ejecutar los siguientes comandos:
 ```
+su -
+```
+
+Despues:
+
+```
 apt-get update
 ```
 
