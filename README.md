@@ -27,7 +27,7 @@ Aparte, tambien se utiliza el siguiente software:
 - Para la instalacion y despliegue de la base de datos existente, debe dirigirse a la carpeta MongoDB, en la cual se encontrara los pasos a seguir para replicar la base de datos de MongoDB Atlas.
 
 ## Configuraciones de Ejecución para Entorno de Desarrollo/Producción
-Antes de todo debemos ejecutar los siguientes comandos:
+Antes de todo debe ejecutar los siguientes comandos:
 ```
 su -
 ```
@@ -53,7 +53,7 @@ git clone https://github.com/Benjamin343/DockerProyecto
 
 ## Instalar NVM 
 
-- Ejecutar el siguiente comando en una terminal bash
+- Ejecute el siguiente comando en una terminal bash
 
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -65,13 +65,13 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
 En nuestro caso ocuparemos Node.JS 16.14.2 para Backend y Node.JS 12.14.1 para Frontend
 
-- Para instalar Node.JS 16.14.2 ejecuta el siguiente comando en una terminal bash
+- Para instalar Node.JS 16.14.2 ejecute el siguiente comando en una terminal bash
 
 ```
 nvm install 16.14.2
 ```
 
-- Para instalar Node.JS 12.14.1 ejecuta el siguiente comando en una terminal bash
+- Para instalar Node.JS 12.14.1 ejecute el siguiente comando en una terminal bash
 
 ```
 nvm install 12.14.1
@@ -79,7 +79,7 @@ nvm install 12.14.1
 
 ## Instalar dependencias del backend
 
-- Primero que todo, establece la version 16.14.2 como la version predeterminada
+- Primero que todo, establezca la version 16.14.2 como la version predeterminada
 ```
 nvm use 16.14.2
 ```
@@ -96,7 +96,7 @@ npm install
 
 ## Ejecución entorno desarrollo Backend
 
-- Para la ejecución del entorno de desarrollo debes de dirigirte al directorio /Backend/vecired y ejecutar el siguiente comando:
+- Para la ejecución del entorno de desarrollo debe de dirigirsee al directorio /Backend/vecired y ejecutar el siguiente comando:
 
 ```
 node dist/
@@ -104,7 +104,7 @@ node dist/
 
 ## Instalar dependencias del Frontend
 
-- Primero que todo, establece la version 12.14.1 como la version predeterminada
+- Primero que todo, establezca la version 12.14.1 como la version predeterminada
 ```
 nvm use 12.14.1
 ```
@@ -116,7 +116,7 @@ npm install
 
 ## Instalar Cordova e Ionic
 
-Para esto necesitaras dirigirte al directorio de /Frontend/vecired-frontend y ejecutar los siguientes comandos:
+Para esto necesitara dirigirse al directorio de /Frontend/vecired-frontend y ejecutar los siguientes comandos:
 
 - Cordova
 ```
@@ -152,7 +152,7 @@ ionic serve -p PUERTO
 ```
 
 ### Si desea levantar el entorno de desarrollo con una IP externa, debe de seguir los siguientes pasos:
-Si quiere ejecutar el entorno de desarrolo, debe declararlo en el comando de la siguiente manera:
+- Si quiere ejecutar el entorno de desarrolo, debe declararlo en el comando de la siguiente manera:
 ```
 ionic serve --external
 ```
@@ -170,17 +170,17 @@ nvm use 16.14.2
 
 Despues debe de ejecutar los siguientes comandos para instalar las dependencias necesarias del frontend:
 
-npm install
+- npm install
 ```
 npm install
 ```
 
-Instalar Cordova
+- Instalar Cordova
 ```
 npm install -g cordova
 ```
 
-Instalar Ionic 7.1.1
+- Instalar Ionic 7.1.1
 ```
 npm install -g @ionic/cli@7.1.1
 ```
@@ -202,8 +202,8 @@ Una vez dentro de este, debe dirigirse al directorio 'Dockerfiles' y moverse a l
 ```bash
 docker build -t imagen Dockerfile:latest
 ```
-Una vez construida la imagen, lanzar un contenedor.
 
+Una vez construida la imagen, lanzar un contenedor.
 ```bash
 docker run --rm -ti -p 3000:3000
 ```
@@ -212,7 +212,7 @@ docker run --rm -ti -p 3000:3000
 
 *** Debido al funcionamiento de Docker, el Dockerfile de frontend no funciona, ya que Docker no maneja de manera correcta un contenedor con una version de NodeJS antigua (Node 12.14.1) ***
 
-- Entrar a la carpeta llamada 'Dockerfile Frontend'
+Entrar a la carpeta llamada 'Dockerfile Frontend'
 ```bash
 docker build -t Dockerfile:latest
 ```
